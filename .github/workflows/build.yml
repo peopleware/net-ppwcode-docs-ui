@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - ppwcode
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linter
+        run: npx gulp lint
+
+      - name: Build bundle
+        run: npx gulp bundle
+
+      - name: Upload bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-bundle
+          path: build/ui-bundle.zip
+          retention-days: 90
