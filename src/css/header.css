@@ -191,6 +191,11 @@ body {
 }
 
 @media screen and (max-width: 768.5px) {
+  .navbar-brand .navbar-item:first-child {
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+  }
+
   .navbar-brand .navbar-item.search {
     padding-left: 0;
     padding-right: 0;
